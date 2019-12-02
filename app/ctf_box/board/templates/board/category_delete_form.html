@@ -1,0 +1,16 @@
+{% extends 'board/board_layout.html' %}
+
+{% block title %}
+  Delete Category "{{ category.title }}" - {{ block.super }}
+{% endblock %}
+
+{% block content %}
+
+  <form action="{{ category.get_delete_url }}" method="post">
+    {% csrf_token %}
+    <h3>Are you sure you want to delete <b>"{{ category.title }}"</b> category?</h3>
+    <a href="{{ category.get_absolute_url }}">Cancel</a>
+    <button type="submit" name="button" class="btn btn-danger">Delete category</button>
+  </form>
+
+{% endblock %}

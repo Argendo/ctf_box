@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+
+
+{% block admin %}
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Create
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'task_create_url' %}">Task</a>
+      <a class="dropdown-item" href="{% url 'category_create_url' %}">Category</a>
+    </div>
+  </div>
+
+  <a href="{{ admin_object.get_update_url }}" class="btn btn-dark edit" style="{% if detail %}display: block;{% endif %}">Edit</a>
+  <a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete" style="{% if detail %}display: block;{% endif %}">Delete</a>
+{% endblock %}
+
+
+{% block title %}
+  Bug bounty - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+          <div class="main">
+            <h1>CTF_BOX Bug bounty program<br>We pay money for your skill!</h1><br><br>
+            <h5>What kind of vulnerabilities do we accept?</h5><br>
+            <ul style="list-style: none; text-align: left">
+              <li>Recieving access to the database/local classes/etcetera important data</li>
+              <li>Global dropdown</li>
+              <li>SSRF</li>
+              <li>SSTI</li>
+              <li>XSS</li>
+            </ul>
+            <h5>What kind of vulnerabilities we ignore?</h5><br>
+            <ul style="list-style: none; text-align: left">
+              <li>DOS</li>
+              <li>DDOS</li>
+              <li>Bruteforce exploiting</li>
+            </ul><br><br>
+            <h5>If you want to report about a vulnerability, please write <a href="https://t.me/argend0">here</a></h5>
+            </div>
+{% endblock %}

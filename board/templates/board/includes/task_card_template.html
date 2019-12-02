@@ -1,0 +1,25 @@
+<div class="card mb-4">
+  <div class="card-header">
+    <h5 class="card-title mt-2">{{ task.title }}</h5>
+    <h5 class="card-title mt-2">Cost: {{ task.cost }}</h5>
+  </div>
+  <div class="card-body">
+    <p class="card-text">{{ task.body|linebreaks }}</p>
+    <a class="card-text" href="{{task.files_link}}">{{task.files_link}}</a><br><br>
+    {% if request.user in task.solvers.all %}
+    <a href="{{ task.get_absolute_url }}" class="btn btn-success">Solved</a>
+    {% else %}
+    <a href="{{ task.get_absolute_url }}" class="btn btn-dark">Expand</a>
+    {% endif %}
+  </div>
+  <div class="card-footer text-muted">
+    Сategory:
+    {% for tag in task.categories.all %}
+      <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+    {% endfor %}<br>
+    Solvers:
+    {% for user in task.solvers.all %}
+      {{user.username}}
+    {% endfor %}
+  </div>
+</div>

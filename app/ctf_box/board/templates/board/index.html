@@ -1,0 +1,14 @@
+{% extends 'board/board_layout.html' %}
+
+
+{% block title %}
+  Task board - {{ block.super }}
+{% endblock %}
+
+
+{% block content %}
+	<h1 class = "mb-5">Tasks:</h1>
+	{% for task in page_object.object_list %}
+		{% include 'board/includes/task_card_template.html' %}
+	{% endfor %}
+{% endblock %}
