@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block admin %}
+  <div class="btn-group">
+    <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Create
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="{% url 'task_create_url' %}">Task</a>
+      <a class="dropdown-item" href="{% url 'category_create_url' %}">Category</a>
+    </div>
+  </div>
+  <a href="{{ admin_object.get_update_url }}" class="btn btn-dark edit" style="{% if detail %}display: block;{% endif %}">Edit</a>
+  <a href="{{ admin_object.get_delete_url }}" class="btn btn-danger delete" style="{% if detail %}display: block;{% endif %}">Delete</a>
+{% endblock %}
+{% block title %}
+  Scoreboard - {{ block.super }}
+{% endblock %}
+{% block content %}
+<br><br>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col" style="font-size: 150%;">User</th>
+      <th scope="col" style="font-size: 150%;">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for profile in profiles %}
+    <tr>
+      <td style="font-size: 150%;">{{ profile.user }}</td>
+      <td style="font-size: 150%;">{{ profile.score }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

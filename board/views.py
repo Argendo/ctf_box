@@ -115,3 +115,9 @@ class CategoryDelete(LoginRequiredMixin, ObjectDeleteMixin, View):
 def categories_list(request):
     categories = Category.objects.all()
     return render(request, 'board/categories_list.html', context = {'categories': categories, 'username': auth.get_user(request).username})
+
+def scoreboard(request):
+    profiles = UserProfile.objects.all()
+    return render(request, 'board/scoreboard.html', context = {'profiles': profiles, 'username': auth.get_user(request).username})
+
+    

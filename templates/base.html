@@ -35,6 +35,9 @@
             <a class="nav-link" href="{% url 'categories_list_url' %}">Categories</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{% url 'scoreboard_url' %}"> Scoreboard </a>
+          </li>
+          <li class="nav-item">
             {% if request.user.is_authenticated %}
             <a class="nav-link" href="{% url 'logout_url' %}">Log out ({{ username }}) </a>
             {% else %}

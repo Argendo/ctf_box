@@ -14,4 +14,5 @@ urlpatterns = [
     path('category/<str:slug>/update/', CategoryUpdate.as_view(), name='category_update_url'),
     path('category/<str:slug>/delete/', CategoryDelete.as_view(), name='category_delete_url'),
     path('main/', main_page, name='main_page_url'),
+    path('scoreboard/', scoreboard, name='scoreboard_url')
 ]
