@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load staticfiles%}
+{% load static %}
 
 {% block admin %}
 
@@ -30,10 +30,11 @@
         <div class="main">
           <h4>This is CTF_BOX - open source CTF engine</h4><br><h4>It was coded by <a href="https://t.me/argend0">argend0</a> with help of endless stock of energy drinks, few cups of coffee and God willing<br><br></h4>
           <br><br>
-          <a href="https://github.com/Argendo"><img src="{% static 'files/dog.jpg' %}" class="logo"></a>
+          <a href="https://github.com/Argendo"><img src="{% static 'files/dog.png' %}" class="logo"></a>
           <br>
           <h5>You can find source code on Github</h5>
-          <a href="https://github.com/Argendo"><img src="{% static 'files/github.png' %}" class="gitlogo"></a><br><br><br>
+          <a href="https://github.com/Argendo"><img src="{% static 'files/github.png' %}" class="gitlogo"></a><br>
+          <h5>Found a vulnerability or bug?<br><br>Please report about it <a href="https://t.me/argend0">here</a></h5>
           </div>
         {% endblock %}
         </div>
