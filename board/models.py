@@ -13,6 +13,10 @@ def gen_slug(s):
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
+    last_ack = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-score', 'last_ack']
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:

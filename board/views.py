@@ -9,6 +9,8 @@ from urllib.parse import unquote
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
+from datetime import datetime
+
 from .models import Task, Category
 from .utils import  *
 from .forms import CategoryForm, TaskForm
@@ -63,6 +65,7 @@ def TaskDetail(request, slug):
         if unquote(flag) == task.flag:
             task.solvers.add(User.objects.get(username=str(request.user.username)))
             profile.score+=task.cost
+            profile.last_ack=datetime.now()
             profile.save()
             task.save()
             return render(request, 'board/task_details.html', context = {'task': task, 'admin_object': task, 'detail': True, 'username': auth.get_user(request).username, 'solved': True, 'attempt': True})
