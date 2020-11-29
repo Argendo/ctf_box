@@ -5,15 +5,23 @@
 {% endblock %}
 
 {% block content %}
-
-  <h1 class="mt-5">
-    {{ task.title }}
+  
+  <div class="row">
+    <h1 class="mt-5">
+      {{ task.title }}
+    </h1>
+  <h1 class="mt-5 offset-9">
+    Cost: {{ task.cost }}
   </h1>
+  </div>
 
   <p>
     {{ task.body|linebreaks }}
   </p>
   <a href="{{ task.files_link }}">{{ task.files_link }}</a><br>
+  {% if auth_please %}
+  <h4>{{auth_please}}</h4>
+  {% endif %}
   {% if request.user.is_authenticated and solved != True %}
     <form class="navbar-form navbar-left" method="GET">
       <div class="form-group">

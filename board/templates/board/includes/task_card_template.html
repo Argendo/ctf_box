@@ -1,11 +1,13 @@
-<div class="card mb-4">
+<div class="card mb-2">
   <div class="card-header">
-    <h5 class="card-title mt-2">{{ task.title }}</h5>
-    <h5 class="card-title mt-2">Cost: {{ task.cost }}</h5>
+    <div class="row">
+    <h5 class="card-title mt-3 offset-1">{{ task.title }}</h5>
+    <h5 class="card-title mt-3 offset-5">Cost: {{ task.cost }}</h5>
+  </div>
   </div>
   <div class="card-body">
-    <p class="card-text">{{ task.body|linebreaks }}</p>
-    <a class="card-text" href="{{task.files_link}}">{{task.files_link}}</a><br><br>
+    <p class="card-text">{{ task.body|linebreaks|truncatechars:70 }}</p>
+    <a class="card-text" href="{{task.files_link}}">{{task.files_link}}</a>
     {% if request.user in task.solvers.all %}
     <a href="{{ task.get_absolute_url }}" class="btn btn-success">Solved</a>
     {% else %}

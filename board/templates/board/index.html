@@ -7,11 +7,18 @@
 
 
 {% block content %}
+	<br>
+	<div class="row">
+	<h1 class="mb-4">Tasks</h1>
 	{% if user.is_authenticated %}
-	<h1>Your score is: {{score}}</h1><br>
+	<h1 class="offset-7">Your <a href="{% url 'scoreboard_url' %}">score</a> is: {{score}}</h1>
 	{% endif %}
-	<h1 class = "mb-5">Tasks:</h1>
+	</div>
+	<div class="row">
 	{% for task in page_object.object_list %}
+		<div class="col-sm-4" style="margin-top: 2%;">
 		{% include 'board/includes/task_card_template.html' %}
+		</div>
 	{% endfor %}
+	</div>
 {% endblock %}
