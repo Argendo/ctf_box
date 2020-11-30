@@ -28,7 +28,7 @@ def task_board(request):
 
     tasks = Task.objects.all()
 
-    paginator = Paginator(tasks, 6)
+    paginator = Paginator(tasks, 9)
 
     page_number = request.GET.get('page', 1)
     page = paginator.get_page(page_number)
@@ -52,24 +52,25 @@ def task_board(request):
 
     return render(request, 'board/index.html', context=context)
 
-
+@csrf_protect
 def TaskDetail(request, slug):
     task = Task.objects.get(slug__iexact=slug)
     solvers = task.solvers.all()
     context = {'solvers': solvers}
-    if request.user.is_active:
+    if request.user.is_authenticated:
         profile = UserProfile.objects.get(user=(request.user))
         if request.user in solvers:
             return render(request, 'board/task_details.html', context = {'task': task, 'admin_object': task, 'detail': True, 'username': auth.get_user(request).username, 'solved': True, 'attempt': True})
-        elif 'flag' in request.GET:
-            flag = request.GET['flag']
+        elif 'flag' in request.POST:
+            flag = request.POST['flag']
             if unquote(flag) == task.flag:
                 task.solvers.add(User.objects.get(username=str(request.user.username)))
+                task.solvers_count=int(task.solvers.count())
                 profile.score+=task.cost
                 profile.last_ack=datetime.now()
                 profile.save()
                 task.save()
-                return render(request, 'board/task_details.html', context = {'task': task, 'admin_object': task, 'detail': True, 'username': auth.get_user(request).username, 'solved': True, 'attempt': True})
+                return redirect(task_board)
             else:
                 return render(request, 'board/task_details.html', context = {'task': task, 'admin_object': task, 'detail': True, 'username': auth.get_user(request).username, 'solved': False, 'attempt': True})
         else:

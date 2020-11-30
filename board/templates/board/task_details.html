@@ -23,7 +23,8 @@
   <h4>{{auth_please}}</h4>
   {% endif %}
   {% if request.user.is_authenticated and solved != True %}
-    <form class="navbar-form navbar-left" method="GET">
+    <form class="navbar-form navbar-left" method="post">
+      {% csrf_token %}
       <div class="form-group">
         <input type="text" placeholder="Flag" class="form-control" name="flag">
       </div>

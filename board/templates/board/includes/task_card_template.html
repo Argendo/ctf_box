@@ -1,27 +1,29 @@
-<div class="card mb-2">
+<div href="#" class="card mb-2">
   <div class="card-header">
-    <div class="row">
-    <h5 class="card-title mt-3 offset-1">{{ task.title }}</h5>
-    <h5 class="card-title mt-3 offset-5">Cost: {{ task.cost }}</h5>
+    <h5 class="card-title mt-2" style="float: left;">
+      {% for tag in task.categories.all %}
+      <a href="{{ tag.get_absolute_url }}" style="color: black;">{{ tag.title.upper }}</a>
+    {% endfor %}
+    </h5>
+    <h5 class="card-title mt-2" style="float: right;">Cost: {{ task.cost }}</h5>
   </div>
-  </div>
-  <div class="card-body">
-    <p class="card-text">{{ task.body|linebreaks|truncatechars:70 }}</p>
-    <a class="card-text" href="{{task.files_link}}">{{task.files_link}}</a>
-    {% if request.user in task.solvers.all %}
-    <a href="{{ task.get_absolute_url }}" class="btn btn-success">Solved</a>
+  <a href="{{ task.get_absolute_url }}" style="text-decoration: none; color: black;">
+  {% if request.user in task.solvers.all %}
+    <div class="card-body" style="text-align: center; background-color: lightgreen;">
+  {% else %}
+    <div class="card-body" style="text-align: center;">
+  {% endif %}
+    <h2>{{task.title}}</h2>
+    {% if task.solvers_count != 0 %}
+      Solved by 
+      {% if task.solvers_count == 1 %}
+        {{task.solvers_count}} user
+      {% else %}
+        {{task.solvers_count}} users
+      {% endif %}
     {% else %}
-    <a href="{{ task.get_absolute_url }}" class="btn btn-dark">Expand</a>
+    Nobody has done it yet
     {% endif %}
   </div>
-  <div class="card-footer text-muted">
-    Сategory:
-    {% for tag in task.categories.all %}
-      <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
-    {% endfor %}<br>
-    Solvers:
-    {% for user in task.solvers.all %}
-      {{user.username}}
-    {% endfor %}
-  </div>
+  </a>
 </div>

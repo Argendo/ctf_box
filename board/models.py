@@ -30,6 +30,7 @@ class Task(models.Model):
     body = models.TextField(blank=True, db_index=True)
     categories = models.ManyToManyField('Category', blank=True, related_name='tasks')
     solvers = models.ManyToManyField(User, blank=True, related_name='tasks')
+    solvers_count = models.IntegerField(default=0)
     date_pub = models.DateTimeField(auto_now_add=True)
     flag = models.CharField(max_length=100, db_index=True)
     files_link = models.URLField(default='', blank=True)

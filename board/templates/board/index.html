@@ -8,12 +8,10 @@
 
 {% block content %}
 	<br>
-	<div class="row">
-	<h1 class="mb-4">Tasks</h1>
+	<h1 class="mb-4" style="float: left;">Tasks</h1>
 	{% if user.is_authenticated %}
-	<h1 class="offset-7">Your <a href="{% url 'scoreboard_url' %}">score</a> is: {{score}}</h1>
+	<h1 class="mb-4" style="float: right;">Your <a href="{% url 'scoreboard_url' %}">score</a> is: {{score}}</h1>
 	{% endif %}
-	</div>
 	<div class="row">
 	{% for task in page_object.object_list %}
 		<div class="col-sm-4" style="margin-top: 2%;">
